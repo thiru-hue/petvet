@@ -357,10 +357,16 @@ button { font-family: inherit; }
   .thumb { height: 80px; }
   .s-a { left: 12px; top: 12px; } .s-b { right: 12px; bottom: 14px; }
   .needs .cloud { display: none; }
-  .dog-stage { flex-basis: 100%; height: auto; display: flex; flex-direction: column; gap: 18px; }
-  .dog-svg { position: static; width: 100%; height: auto; max-height: 240px; }
-  .tags { position: static; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-  .pv-tag { position: static; height: 46px; font-size: 14px; }
+  .dog-stage { flex-basis: 100%; height: 360px; }
+  .dog-svg { inset: 56px 0 30px; width: 100%; height: calc(100% - 86px); }
+  .pv-tag { height: 36px; padding: 0 13px; font-size: 12px; box-shadow: 0 3px 0 rgba(27, 58, 140, 0.18); }
+  .pv-tag[data-id="eyes"] { left: 0 !important; top: 27% !important; }
+  .pv-tag[data-id="ears"] { left: 24% !important; top: 5% !important; }
+  .pv-tag[data-id="skin"] { left: auto !important; right: 2% !important; top: 14% !important; }
+  .pv-tag[data-id="wounds"] { left: auto !important; right: 0 !important; top: 40% !important; }
+  .pv-tag[data-id="gut"] { left: 26% !important; top: 68% !important; }
+  .pv-tag[data-id="joints"] { left: auto !important; right: 0 !important; top: 82% !important; }
+  .pv-tag[data-id="paws"] { left: 0 !important; top: 88% !important; }
   .needs-card { flex-basis: 100%; padding: 22px; min-height: 0; }
   .mini-product .btn { width: 100%; }
   .why-card { min-height: 0; padding: 26px; }
@@ -386,6 +392,6 @@ button { font-family: inherit; }
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; transition-delay: 0s !important; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; animation-delay: 0s !important; transition-duration: 0.001ms !important; transition-delay: 0s !important; }
   [data-reveal] { opacity: 1; transform: none; }
 }

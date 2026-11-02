@@ -28,6 +28,7 @@ export function NeedsExplorer() {
           {AREAS.map((a) => (
             <button
               key={a.id}
+              data-id={a.id}
               className={`pv-tag${a.id === id ? " on" : ""}`}
               aria-pressed={a.id === id}
               style={{ left: a.pos.left, top: a.pos.top }}

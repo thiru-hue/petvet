@@ -361,8 +361,8 @@ button { font-family: inherit; }
   .dog-svg { inset: 12% auto auto 0; width: 100%; height: auto; }
   /* tags are centred on an anchor point on the dog (percentages of the dog drawing) */
   .pv-tag { translate: -50% -50%; height: 34px; padding: 0 12px; font-size: 12px; box-shadow: 0 3px 0 rgba(27, 58, 140, 0.18); }
-  .pv-tag[data-id="eyes"] { left: 11% !important; top: 15% !important; }
-  .pv-tag[data-id="ears"] { left: 32% !important; top: 9% !important; }
+  .pv-tag[data-id="eyes"] { left: 11% !important; top: 22% !important; }
+  .pv-tag[data-id="ears"] { left: 32% !important; top: 14% !important; }
   .pv-tag[data-id="skin"] { left: 62% !important; top: 28% !important; }
   .pv-tag[data-id="wounds"] { left: 80% !important; top: 50% !important; }
   .pv-tag[data-id="gut"] { left: 40% !important; top: 62% !important; }

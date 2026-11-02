@@ -364,10 +364,10 @@ button { font-family: inherit; }
   .pv-tag[data-id="eyes"] { left: 13% !important; top: 9% !important; }
   .pv-tag[data-id="ears"] { left: 37% !important; top: 5% !important; }
   .pv-tag[data-id="skin"] { left: 63% !important; top: 19% !important; }
-  .pv-tag[data-id="wounds"] { left: 78% !important; top: 41% !important; }
-  .pv-tag[data-id="gut"] { left: 50% !important; top: 53% !important; }
-  .pv-tag[data-id="joints"] { left: 74% !important; top: 67% !important; }
-  .pv-tag[data-id="paws"] { left: 36% !important; top: 94% !important; }
+  .pv-tag[data-id="wounds"] { left: 80% !important; top: 33% !important; }
+  .pv-tag[data-id="gut"] { left: 41% !important; top: 54% !important; }
+  .pv-tag[data-id="joints"] { left: 77% !important; top: 74% !important; }
+  .pv-tag[data-id="paws"] { left: 36% !important; top: 91% !important; }
   .needs-card { flex-basis: 100%; padding: 22px; min-height: 0; }
   .mini-product .btn { width: 100%; }
   .why-card { min-height: 0; padding: 26px; }

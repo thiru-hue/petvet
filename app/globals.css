@@ -363,8 +363,8 @@ button { font-family: inherit; }
   .pv-tag { translate: -50% -50%; height: 34px; padding: 0 12px; font-size: 12px; box-shadow: 0 3px 0 rgba(27, 58, 140, 0.18); }
   .pv-tag[data-id="eyes"] { left: 13% !important; top: 9% !important; }
   .pv-tag[data-id="ears"] { left: 37% !important; top: 5% !important; }
-  .pv-tag[data-id="skin"] { left: 63% !important; top: 19% !important; }
-  .pv-tag[data-id="wounds"] { left: 80% !important; top: 33% !important; }
+  .pv-tag[data-id="skin"] { left: 56% !important; top: 14% !important; }
+  .pv-tag[data-id="wounds"] { left: 82% !important; top: 45% !important; }
   .pv-tag[data-id="gut"] { left: 41% !important; top: 54% !important; }
   .pv-tag[data-id="joints"] { left: 77% !important; top: 74% !important; }
   .pv-tag[data-id="paws"] { left: 36% !important; top: 91% !important; }

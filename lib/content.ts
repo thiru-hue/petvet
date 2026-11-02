@@ -3,7 +3,7 @@ export const SITE = {
   tagline: "Care for every paw, every day.",
   description:
     "Gentle, easy-to-use health and care products for dogs and cats. Shop PetVet Wound & Skin Care, with more pet care launches on the way.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://petvet.vercel.app",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://petvet-nine.vercel.app",
 };
 
 export const NAV = [

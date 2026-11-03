@@ -1,315 +1,227 @@
-import { Header } from "@/components/Header";
-import { NeedsExplorer } from "@/components/NeedsExplorer";
-import { RevealObserver } from "@/components/RevealObserver";
-import { Paw } from "@/components/Paw";
+import Image from "next/image";
+import { KITS, IMG } from "@/lib/data";
+import { BagDrawer, Header, JoinForm, MobileBar, RevealObserver } from "@/components/Chrome";
+import { BodyMap, CarePacks, Crew, Featured, Quiz, Treats } from "@/components/Sections";
+import { AddButton, FeatureLink, MiniPack } from "@/components/ui";
 
-const categories = [
-  { name: "Wound Care", cls: "c1" },
-  { name: "Skin & Coat", cls: "c2" },
-  { name: "New Arrivals", cls: "c3" },
-  { name: "Bestsellers", cls: "c4" },
-];
-
-const upcoming = [2, 3, 4];
-
-const why = [
-  { n: "01", t: "Made for pets", d: "Every product is made specifically for dogs and cats, not adapted from human care." },
-  { n: "02", t: "Easy at home", d: "Simple to use with clear directions, so everyday care fits into your routine." },
-  { n: "03", t: "[Your promise]", d: "[e.g. vet-tested, made in India, natural ingredients — only what's true for PetVet.]", yellow: true },
-];
-
-const bundles = [
-  { cls: "b1", name: "Pet First-Aid Kit", sub: "Wound & Skin Care + [Product] · [PRICE]" },
-  { cls: "b2", name: "[Bundle name]", sub: "[Product] + [Product] · [PRICE]" },
-  { cls: "b3", name: "[Bundle name]", sub: "[Product] + [Product] · [PRICE]" },
-  { cls: "b4", name: "[Bundle name]", sub: "[Product] + [Product] · [PRICE]" },
-];
-
-const chev = (
-  <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M9 6l6 6-6 6" /></svg>
+const PawPaths = () => (
+  <>
+    <circle cx="6" cy="9" r="2.2" /><circle cx="10" cy="5.5" r="2.2" /><circle cx="14" cy="5.5" r="2.2" /><circle cx="18" cy="9" r="2.2" />
+    <path d="M12 11c3 0 6 4 6 6.5 0 2-2 2.5-3 2.5-1.3 0-1.8-.8-3-.8s-1.7.8-3 .8c-1 0-3-.5-3-2.5C6 15 9 11 12 11z" />
+  </>
 );
+const Ring = ({ id, text }: { id: string; text: string }) => (
+  <svg className="ring" viewBox="0 0 120 120" aria-hidden="true">
+    <defs><path id={id} d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0" /></defs>
+    <text fontSize="12.5" letterSpacing="4" fill="currentColor"><textPath href={`#${id}`}>{text}</textPath></text>
+  </svg>
+);
+const ANN = ["Powered by HOCl", "Made for dogs & cats", "New: soft treats & cozy milk", "From eyes to paws", "Made in India"];
+const MARQ = ["Walk. Wipe. Wag.", "Big fresh smiles", "Less itch, more naps", "Clear eyes, clean ears", "Soft treats", "Cozy milk"];
 
 export default function Home() {
   return (
-    <div id="top" className="page">
+    <>
       <RevealObserver />
       <a href="#main" className="skip">Skip to content</a>
-
-      <div className="announce">
-        [OFFER — e.g. Free shipping on orders over ₹X] · <a href="#range">Shop now</a>
+      <div className="announce" aria-hidden="true">
+        <div>{[0, 1].map((k) => ANN.map((a) => <span key={`${k}${a}`}>✦ {a}</span>))}</div>
       </div>
       <Header />
 
       <main id="main">
+        <div id="top" />
         {/* HERO */}
-        <section className="hero">
-          <div className="container hero-inner">
-            <div className="wordmark-wrap">
-              <h1 className="wordmark" aria-label="PetVet">PETVET</h1>
-              <span className="float-pill p1">Wound Care</span>
-              <span className="float-pill p2">Skin &amp; Coat</span>
-              <span className="float-pill p3 yellow">Everyday Care</span>
-              <span className="float-pill p4">Dogs &amp; Cats</span>
+        <section className="hero" style={{ paddingBottom: 0 }}>
+          <div className="wrap grid">
+            <div>
+              <span className="label" style={{ color: "var(--blush)" }}>PetVet · Everyday pet care</span>
+              <h1 style={{ marginTop: 16 }}>
+                From eyes<br />to{" "}
+                <span className="r scrib">paws.
+                  <svg viewBox="0 0 300 40" preserveAspectRatio="none" aria-hidden="true"><path d="M5 30 C 80 8, 200 6, 295 22" fill="none" stroke="#B3311E" strokeWidth="7" strokeLinecap="round" /></svg>
+                </span>
+              </h1>
+              <p className="lead">Gentle HOCl care for paws, teeth, skin, eyes and ears — plus soft treats and a cozy gut-health milk. Everything your dog or cat needs, between the walks and the naps.</p>
+              <div className="ctas"><a className="btn red" href="#care">Shop pet care</a><a className="btn cream" href="#quiz">Build my pet&apos;s kit</a></div>
+              <div className="proof"><div>Dogs &amp; cats</div><div>Powered by HOCl</div><div>Made in India</div></div>
             </div>
-
-            <div className="hero-grid">
-              <div className="hero-photo" data-reveal>
-                <svg aria-hidden="true" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="16" rx="3" /><circle cx="9" cy="10" r="2" /><path d="M21 16l-5-5-9 9" /></svg>
-                <span>[HERO PHOTO: happy dog &amp; cat with the PetVet range]</span>
+            <div className="hero-art">
+              <div className="stamp" aria-hidden="true">
+                <Ring id="r1" text="PETVET · EVERYDAY · CARE · PETVET ·" />
+                <div className="core"><svg viewBox="0 0 24 24" fill="#173798"><PawPaths /></svg></div>
               </div>
-              <div className="hero-copy" data-reveal style={{ "--d": "120ms" } as React.CSSProperties}>
-                <h2>Care for every paw, <span>every day.</span></h2>
-                <p>Gentle, easy-to-use health and care products for dogs and cats — starting with wound and skin care, with more on the way.</p>
-                <div className="btn-row">
-                  <a href="#range" className="btn btn-yellow btn-lg">Shop all products</a>
-                  <a href="#needs" className="btn btn-ghost btn-lg">Find what my pet needs</a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <svg aria-hidden="true" viewBox="0 0 1440 120" preserveAspectRatio="none" className="hero-wave"><path d="M0 70C180 10 300 110 520 80S860 0 1060 50 1340 110 1440 60V120H0z" fill="#FFFFFF" /></svg>
-        </section>
-
-        {/* CATEGORIES */}
-        <section id="categories" className="section categories">
-          <div className="container stack">
-            <div className="head-row" data-reveal>
-              <h2 className="h2">Shop by category</h2>
-              <a href="#range" className="link-strong">View all</a>
-            </div>
-            <div className="cat-grid">
-              {categories.map((c, i) => (
-                <a key={c.name} href="#range" className={`cat-card ${c.cls}`} data-reveal style={{ "--d": `${i * 90}ms` } as React.CSSProperties}>
-                  <span className="cat-ph">[Category photo]</span>
-                  <span className="cat-pill">{c.name}</span>
-                </a>
-              ))}
+              <div className="sticker" style={{ right: "4%", top: 40 }}>Walk.<br />Wipe.<br />Wag.</div>
+              <div className="sticker s2" style={{ left: "6%", bottom: 110 }}>Less itch,<br />more naps</div>
+              <Image className="main" src={IMG.hero.src} width={IMG.hero.w} height={IMG.hero.h} alt="PetVet dog with a bone among flowers" priority sizes="(max-width:1000px) 90vw, 560px" />
             </div>
           </div>
         </section>
 
-        {/* RANGE */}
-        <section id="range" className="section range">
-          <div className="container stack">
-            <div className="head-row end" data-reveal>
-              <h2 className="h2">The PetVet range</h2>
-              <p className="muted">One trusted product today, a full care kit tomorrow. New launches are on the way.</p>
-            </div>
-            <div className="card-grid">
-              <article className="product-card" data-reveal>
-                <div className="pc-media y">
-                  [Wound &amp; Skin Care photo]
-                  <span className="badge">Bestseller</span>
-                </div>
-                <h3>Wound &amp; Skin Care</h3>
-                <p className="muted-sm">For minor cuts, scrapes and irritated skin</p>
-                <div className="feats">
-                  <span><i className="feat-ic y"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B3A8C" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="8" width="18" height="8" rx="4" transform="rotate(-35 12 12)" /><path d="M10.5 10.5h.01M13.5 13.5h.01M13.5 10.5h.01M10.5 13.5h.01" /></svg></i>Wound care</span>
-                  <span><i className="feat-ic y"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1B3A8C" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z" /></svg></i>Skin comfort</span>
-                </div>
-                <div className="pc-foot"><b>From [PRICE]</b><button className="btn btn-blue btn-sm">Add to cart</button></div>
-              </article>
+        <div className="marq" aria-hidden="true">
+          <div>{[0, 1].map((k) => MARQ.map((m) => <span key={`${k}${m}`} style={{ color: "var(--navy)", margin: 0 }}>{m}<span>✦</span></span>))}</div>
+        </div>
 
-              {upcoming.map((n, i) => (
-                <article key={n} className="product-card" data-reveal style={{ "--d": `${(i + 1) * 90}ms` } as React.CSSProperties}>
-                  <div className={`pc-media ${n % 2 ? "y" : "b"}`}>
-                    [Product {n} photo]
-                    <span className="badge soon">Coming soon</span>
-                  </div>
-                  <h3>[Product {n}]</h3>
-                  <p className="muted-sm">[One-line benefit]</p>
-                  <div className="feats">
-                    <span><i className={`feat-ic ${n % 2 ? "y" : "b"}`}>+</i>[Benefit]</span>
-                    <span><i className={`feat-ic ${n % 2 ? "y" : "b"}`}>+</i>[Benefit]</span>
-                  </div>
-                  <div className="pc-foot"><b>From [PRICE]</b><button className="btn btn-outline btn-sm">Notify me</button></div>
-                </article>
-              ))}
+        {/* CARE */}
+        <section id="care">
+          <div className="wrap">
+            <div className="shead rv">
+              <div><span className="label">The care range</span><h2 className="h2">Four packs.<br />Head to tail.</h2></div>
+              <p>HOCl essentials for dogs &amp; cats. Hover (or tap) a pack to flip it and see how to use it.</p>
             </div>
+            <CarePacks />
+            <div className="fliptip rv">↻ flip a pack for the how-to</div>
+          </div>
+        </section>
+
+        {/* QUIZ */}
+        <section className="quiz" id="quiz">
+          <div className="stamp" aria-hidden="true">
+            <Ring id="r2" text="60 SECONDS · YOUR PET'S KIT ·" />
+            <div className="core" style={{ background: "var(--cream)" }}><svg viewBox="0 0 24 24" fill="#B3311E"><PawPaths /></svg></div>
+          </div>
+          <div className="wrap grid">
+            <div className="rv">
+              <span className="label" style={{ color: "var(--blush)" }}>Build a kit</span>
+              <h2 style={{ marginTop: 14 }}>What does<br />your pet<br />need?</h2>
+              <p className="lead">Two quick taps and we&apos;ll put together a kit made for your dog or cat — then add it all to your bag in one go.</p>
+            </div>
+            <Quiz />
           </div>
         </section>
 
         {/* FEATURED */}
-        <section id="shop" className="section featured">
-          <div className="container featured-grid">
-            <div className="gallery" data-reveal>
-              <div className="shot">
-                [PRODUCT SHOT: Wound &amp; Skin Care]
-                <span className="sticker s-a">Made for dogs &amp; cats</span>
-                <span className="sticker s-b">Easy to apply</span>
-              </div>
-              <div className="thumbs">
-                <button className="thumb active" aria-label="View angle 1">[Angle 1]</button>
-                <button className="thumb" aria-label="View in use">[In use]</button>
-                <button className="thumb" aria-label="View label">[Label]</button>
-              </div>
-            </div>
-            <div className="buy" data-reveal style={{ "--d": "120ms" } as React.CSSProperties}>
-              <div className="eyebrow">Featured product</div>
-              <div className="rating"><span className="stars" aria-hidden="true">★★★★★</span> [RATING] · [REVIEW COUNT] reviews</div>
-              <h2 className="h2 big">PetVet Wound &amp; Skin Care</h2>
-              <p className="muted-md">For dogs &amp; cats · [SIZE, e.g. 100 ml spray]</p>
-              <div className="price">[YOUR PRICE]</div>
-              <p className="lead-dark">[One or two sentences on what it does — how it cleans, soothes and protects minor wounds and irritated skin.]</p>
-              <fieldset className="options">
-                <legend className="sr">Purchase option</legend>
-                <label><input type="radio" name="buy" defaultChecked /> One-time purchase <b>[PRICE]</b></label>
-                <label className="sub"><input type="radio" name="buy" /> Subscribe &amp; save <span className="save">Save [X]%</span><b>[PRICE]</b></label>
-              </fieldset>
-              <div className="btn-row">
-                <button className="btn btn-blue btn-xl grow">Add to cart</button>
-                <button className="btn btn-yellow btn-xl">Buy now</button>
-              </div>
-              <div className="accordion">
-                {[
-                  ["Key ingredients", "[LIST ACTIVE INGREDIENTS]"],
-                  ["How to use", "[DIRECTIONS]"],
-                  ["Shipping", "Home delivery"],
-                ].map(([k, v]) => (
-                  <button key={k} className="acc-row"><span><small>{k}</small>{v}</span>{chev}</button>
-                ))}
+        <section className="feat" id="shop"><Featured /></section>
+
+        {/* HOCl */}
+        <section className="hocl" id="hocl">
+          <div className="wrap grid">
+            <div className="rv"><h2><small>What&apos;s inside</small>What&apos;s</h2><div className="mol">HOCl?</div></div>
+            <div className="rv">
+              <p>Hypochlorous acid — the same molecule your pet&apos;s own white blood cells make as part of the body&apos;s natural defences. We bottle it for gentle, everyday care.</p>
+              <div className="facts">
+                <div className="fact"><b>Body-familiar</b><span>A molecule your pet&apos;s immune cells already make.</span></div>
+                <div className="fact"><b>Daily gentle</b><span>Made for routine use on paws, gums, skin, eyes and ears.</span></div>
+                <div className="fact"><b>Dogs &amp; cats</b><span>Every pack in the range is made for both.</span></div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* NEEDS */}
-        <section id="needs" className="section needs">
-          <svg aria-hidden="true" width="220" height="110" viewBox="0 0 220 110" fill="none" stroke="#fff" strokeWidth="5" strokeLinecap="round" className="cloud c-l"><path d="M30 80c-18 0-24-24-6-30 2-20 30-26 40-10 8-22 44-20 46 4 20-6 34 16 20 30-6 8-90 6-100 6z" /></svg>
-          <svg aria-hidden="true" width="190" height="95" viewBox="0 0 220 110" fill="none" stroke="#fff" strokeWidth="5" strokeLinecap="round" className="cloud c-r"><path d="M30 80c-18 0-24-24-6-30 2-20 30-26 40-10 8-22 44-20 46 4 20-6 34 16 20 30-6 8-90 6-100 6z" /></svg>
-          <div className="container stack center">
-            <div className="center-text" data-reveal>
-              <h2 className="h2">Find out what your pet needs</h2>
-              <p className="muted">Tap an area on the dog to learn more.</p>
+        {/* MAP */}
+        <section className="map" id="map">
+          <div className="wrap">
+            <div className="shead rv" style={{ justifyContent: "center", textAlign: "center" }}>
+              <div><span className="label">Head to tail</span><h2 className="h2">Tap the pup</h2></div>
             </div>
-            <div className="full" data-reveal><NeedsExplorer /></div>
+            <BodyMap />
           </div>
         </section>
 
-        {/* WHY */}
-        <section className="section why">
-          <div className="container stack">
-            <h2 className="h2 on-sky" data-reveal>Why pet parents<br />choose PetVet</h2>
-            <div className="why-grid">
-              {why.map((w, i) => (
-                <div key={w.n} className={`why-card${w.yellow ? " yellow" : ""}`} data-reveal style={{ "--d": `${i * 100}ms` } as React.CSSProperties}>
-                  <div className="why-n">{w.n}</div>
-                  <h3>{w.t}</h3>
-                  <p>{w.d}</p>
-                </div>
-              ))}
+        {/* TREATS */}
+        <section className="treats" id="treats">
+          <div className="wrap">
+            <div className="shead rv">
+              <div><span className="label">Treat drawer</span><h2 className="h2">Soft treats,<br />real food</h2></div>
+              <p>Chicken, fish and shrimp treats in kraft pouches, made in India. Small bites, big wags.</p>
             </div>
-            <div className="badges" data-reveal>
-              <span className="badges-label">Certified &amp; tested:</span>
-              {[1, 2, 3].map((b) => (<span key={b} className="badge-ring">[Badge]</span>))}
-            </div>
+            <Treats />
           </div>
         </section>
 
-        {/* STORY */}
-        <section id="story" className="section story">
-          <svg aria-hidden="true" viewBox="0 0 400 400" className="blob bl1"><path d="M300 60c60 50 80 150 30 230s-170 110-240 50S10 170 60 100 240 10 300 60z" fill="#CFF0FA" /></svg>
-          <svg aria-hidden="true" viewBox="0 0 400 400" className="blob bl2"><path d="M320 80c70 60 60 190-10 250S110 380 60 300 40 110 120 70s130-50 200 10z" fill="#DCE8FF" /></svg>
-          <div className="container narrow">
-            <div className="story-card" data-reveal>
-              <div className="founder">
-                <div className="founder-photo">[Founder photo]</div>
-                <strong>[Founder name]</strong>
-                <span>Founder, PetVet</span>
-              </div>
-              <div className="story-copy">
-                <h2>Why we started PetVet</h2>
-                <p>[Your story in 3–4 sentences — what made you start PetVet, the pet or moment behind it, and what you want every product to do for pets and their families.]</p>
+        {/* COZY */}
+        <section className="cozy" id="cozy">
+          <div className="wrap grid">
+            <div className="rv">
+              <span className="label" style={{ color: "var(--blush)" }}>Gut health</span>
+              <h2 style={{ marginTop: 12 }}>Cozy<br /><span>milk.</span></h2>
+              <p>A warm, comforting milk made with your pet&apos;s tummy in mind — a little bowl of calm for happy guts and sleepy evenings.</p>
+              <ul><li>Supports gut health</li><li>A treat they&apos;ll lap up</li><li>Part of the PetVet routine</li></ul>
+              <div style={{ display: "flex", gap: 14, flexWrap: "wrap" }}>
+                <AddButton id="cozy" className="btn cream" />
+                <a className="btn ghost" href="#join">Get launch updates</a>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* PROMISE */}
-        <section className="promise">
-          <div className="promise-inner" data-reveal>
-            <Paw size={30} color="#FFD24A" />
-            <span className="eyebrow gold">The PetVet Promise</span>
-            <p>[Your guarantee — e.g. If you or your pet aren&apos;t happy, we&apos;ll make it right within X days.]</p>
-          </div>
-        </section>
-
-        {/* REVIEWS */}
-        <section id="reviews" className="section reviews">
-          <div className="container stack">
-            <div className="head-row end" data-reveal>
-              <div className="rev-head">
-                <h2 className="h2 on-dark">Reviews worth<br />wagging about</h2>
-                <p><strong>[X]%</strong> would recommend PetVet · <strong>[RATING]</strong> average from <strong>[COUNT]</strong> reviews</p>
+            <div className="milk rv">
+              <div className="nt">slurp.<br />purr. repeat.</div>
+              <div className="carton">
+                <div className="brand">PETVET<small>PET CARE</small></div>
+                <div className="big">Cozy<br />milk</div>
+                <div className="sb">Gut health milk</div>
+                <div className="bt"><span>Happy tummies</span><span>✦</span></div>
               </div>
-              <div className="rev-actions">
-                <button className="btn btn-ghost">Write a review</button>
-                <button aria-label="Previous reviews" className="icon-btn icon-btn-ghost lg"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M19 12H5M11 6l-6 6 6 6" /></svg></button>
-                <button aria-label="Next reviews" className="icon-btn icon-btn-yellow lg"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg></button>
-              </div>
-            </div>
-            <div className="rev-grid">
-              {[
-                { ph: "[Customer pet photo]" },
-                { ph: "[Veterinarian photo]", vet: true },
-                { ph: "[Before / after photo]" },
-              ].map((r, i) => (
-                <figure key={i} className={`rev-card${r.vet ? " vet" : ""}`} data-reveal style={{ "--d": `${i * 100}ms` } as React.CSSProperties}>
-                  <div className="rev-ph">{r.ph}</div>
-                  {r.vet ? <span className="eyebrow dark">Vet&apos;s view</span> : <span className="stars" aria-label="Rating placeholder">★★★★★</span>}
-                  <blockquote>{r.vet ? "“[A real quote from a vet who recommends PetVet.]”" : "“[Real customer review.]”"}</blockquote>
-                  <figcaption>{r.vet ? "Dr. [Name] · [Clinic]" : <>[Name] · [Pet, breed] · <span className="verified">Verified buyer</span></>}</figcaption>
-                </figure>
-              ))}
-            </div>
-            <div className="press">
-              <span>Featured in:</span><b>[Press 1]</b><b>[Press 2]</b><b>[Press 3]</b>
+              <Image className="cat" src={IMG.cat_fish.src} width={IMG.cat_fish.w} height={IMG.cat_fish.h} alt="Cat curled up asleep" sizes="220px" />
             </div>
           </div>
         </section>
 
-        {/* BUNDLES */}
-        <section id="bundles" className="section bundles">
-          <div className="container stack">
-            <div className="head-row end" data-reveal>
-              <h2 className="h2">Better together, for less</h2>
-              <p className="muted">Care kits that pair PetVet products — and save you more.</p>
+        {/* KITS */}
+        <section id="kits">
+          <div className="wrap">
+            <div className="shead rv">
+              <div><span className="label">Better together</span><h2 className="h2">Ready-made kits</h2></div>
+              <p>Packs that go together, for the moments that need them. One tap adds the whole kit.</p>
             </div>
-            <div className="bundle-grid">
-              {bundles.map((b, i) => (
-                <article key={i} className={`bundle ${b.cls}`} data-reveal style={{ "--d": `${i * 90}ms` } as React.CSSProperties}>
-                  <span className="save-pill">Save [X]%</span>
-                  <div className="bundle-ph">[Bundle photo]</div>
-                  <strong>{b.name}</strong>
-                  <span>{b.sub}</span>
+            <div className="kgrid">
+              {KITS.map((k) => (
+                <article className="kit rv" key={k.id}>
+                  <span className="pill">{k.pill}</span>
+                  <div className="pics">{k.items.map((i) => <MiniPack key={i} id={i} />)}</div>
+                  <strong>{k.name}</strong>
+                  <span className="inc">{k.inc}</span>
+                  <AddButton kit={k.id} className="add solid" label="Add kit to bag" />
                 </article>
               ))}
             </div>
           </div>
         </section>
+
+        {/* CREW */}
+        <section className="crew">
+          <div className="wrap">
+            <div className="shead rv" style={{ justifyContent: "center", textAlign: "center" }}>
+              <div><span className="label">Meet the crew</span><h2 className="h2">One for every job</h2></div>
+            </div>
+            <Crew />
+          </div>
+        </section>
+
+        {/* JOIN */}
+        <section className="join" id="join">
+          <Image className="peek-dog" src={IMG.dog_bone.src} width={IMG.dog_bone.w} height={IMG.dog_bone.h} alt="" sizes="160px" />
+          <Image className="peek-cat" src={IMG.cat_run.src} width={IMG.cat_run.w} height={IMG.cat_run.h} alt="" sizes="180px" />
+          <div className="wrap rv">
+            <span className="label" style={{ color: "var(--blush)" }}>Join the pack</span>
+            <h2 style={{ marginTop: 12 }}>Be first in line</h2>
+            <p>Launch news, new treats and pet-care tips — straight to your inbox.</p>
+            <JoinForm />
+          </div>
+        </section>
       </main>
 
-      <footer id="contact" className="footer">
-        <div className="container stack">
-          <div className="foot-top">
-            <div className="join">
-              <span className="join-t">Join the pack!</span>
-              <p>New launches and pet care tips, straight to your inbox.</p>
-              <form className="join-form">
-                <label htmlFor="fn-email" className="sr">Email address</label>
-                <input id="fn-email" type="email" autoComplete="email" placeholder="you@email.com" />
-                <button type="button" className="btn btn-yellow btn-lg">Subscribe</button>
-              </form>
-            </div>
-            <nav aria-label="Footer" className="foot-cols">
-              <div><strong>Shop</strong><a href="#range">All products</a><a href="#categories">Categories</a><a href="#bundles">Bundles</a></div>
-              <div><strong>Help</strong><a href="#needs">Take the quiz</a><a href="#contact">FAQs</a><a href="#contact">Contact</a></div>
-              <div><strong>PetVet</strong><a href="#story">Our story</a><a href="#reviews">Reviews</a></div>
-            </nav>
+      <footer>
+        <div className="wrap">
+          <div>
+            <div className="logo-f"><Image src="/brand/petvet-logo-white.svg" alt="PetVet" width={787} height={288} unoptimized /></div>
+            <p style={{ fontSize: 14, maxWidth: 300 }}>Pet care, from eyes to paws. HOCl essentials, soft treats and cozy milk for dogs &amp; cats.</p>
           </div>
-          <p className="legal">For animal use only. Always follow label directions, and consult your veterinarian for serious or persistent conditions. © 2026 PetVet.</p>
+          <div>
+            <h4>Pet care</h4>
+            <ul>
+              <li><FeatureLink id="pawtect">Pawtect</FeatureLink></li>
+              <li><FeatureLink id="pawdent">Pawdent</FeatureLink></li>
+              <li><FeatureLink id="pawse">Pawse the Itch</FeatureLink></li>
+              <li><FeatureLink id="pawsense">Pawsense</FeatureLink></li>
+            </ul>
+          </div>
+          <div><h4>Food</h4><ul><li><a href="#treats">Soft treats</a></li><li><a href="#cozy">Cozy milk</a></li><li><a href="#kits">Kits</a></li></ul></div>
+          <div><h4>Help</h4><ul><li><a href="#quiz">Build a kit</a></li><li><a href="#hocl">What&apos;s HOCl?</a></li><li><a href="#join">Contact</a></li></ul></div>
+          <div className="legal"><span>© 2026 PetVet Pet Care. Made in India.</span><span>For animal use only. If symptoms persist, see your vet.</span></div>
         </div>
       </footer>
-    </div>
+
+      <MobileBar />
+      <BagDrawer />
+    </>
   );
 }
